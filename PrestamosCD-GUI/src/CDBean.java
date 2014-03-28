@@ -1,6 +1,7 @@
 
 public class CDBean  implements Comparable<Object> {
 
+	
 	String titulo, autor, genero, prestamo;
 
 	public CDBean(String titulo, String autor, String genero, 
