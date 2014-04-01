@@ -1,3 +1,5 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 
@@ -67,6 +69,11 @@ public class BuscarReg extends javax.swing.JDialog {
 					jbtAceptar.setText("Aceptar");
 					jbtAceptar.setBounds(285, 21, 90, 26);
 					jbtAceptar.setMnemonic(java.awt.event.KeyEvent.VK_A);
+					jbtAceptar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent evt) {
+							jbtAceptarActionPerformed(evt);
+						}
+					});
 				}
 				{
 					jbtCancelar = new JButton();
@@ -74,6 +81,11 @@ public class BuscarReg extends javax.swing.JDialog {
 					jbtCancelar.setText("Cancelar");
 					jbtCancelar.setBounds(285, 58, 90, 26);
 					jbtCancelar.setMnemonic(java.awt.event.KeyEvent.VK_C);
+					jbtCancelar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent evt) {
+							jbtCancelarActionPerformed(evt);
+						}
+					});
 				}
 				{
 					jbtBorrar = new JButton();
@@ -81,6 +93,11 @@ public class BuscarReg extends javax.swing.JDialog {
 					jbtBorrar.setText("Borrar");
 					jbtBorrar.setBounds(285, 95, 90, 26);
 					jbtBorrar.setMnemonic(java.awt.event.KeyEvent.VK_B);
+					jbtBorrar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent evt) {
+							jbtBorrarActionPerformed(evt);
+						}
+					});
 				}
 				{
 					jScrollPane1 = new JScrollPane();
@@ -99,6 +116,33 @@ public class BuscarReg extends javax.swing.JDialog {
 			getRootPane().setDefaultButton(jbtAceptar);
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	private void jbtAceptarActionPerformed(ActionEvent evt) {
+		// obtiene el indice y lo visualiza en la pantalla principal.
+		int i=jlsListaCDs.getSelectedIndex();
+		if (i>=0)
+			ventanaPadre.setRegDatos(i);
+	}
+	
+	private void jbtCancelarActionPerformed(ActionEvent evt) {
+		// Ocultamos la ventana y la eliminamos.
+		this.setVisible(false);
+		this.dispose();
+	}
+	
+	public void actualizarLista() {
+		// metodo para actualizar los cd´s si tenemos altas..
+		jlsListaCDs.setListData(ventanaPadre.getCDs());
+	}
+	
+	private void jbtBorrarActionPerformed(ActionEvent evt) {
+		// metodo para eliminar un cd de la lista y del vector de cd´s.
+		int i=jlsListaCDs.getSelectedIndex();
+		if (i>=0) {
+			ventanaPadre.getCDs().remove(i);
+			this.actualizarLista();
 		}
 	}
 

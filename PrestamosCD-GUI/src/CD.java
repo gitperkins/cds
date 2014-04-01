@@ -2,6 +2,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Collections;
 import java.util.Vector;
 
@@ -35,6 +37,8 @@ public class CD extends javax.swing.JFrame {
 	 * 
 	 */
 	private Vector<CDBean> CDs;
+	BuscarReg dlgBuscar;
+	
 	private static final long serialVersionUID = 1L;
 	private JMenu jMnuArchivo;
 	private JTextField jtfTitulo;
@@ -69,6 +73,8 @@ public class CD extends javax.swing.JFrame {
 		super();
 		initGUI();
 		CDs=new Vector<CDBean>();
+		// Evitar cierre por defecto de la ventana.
+		this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 	}
 	
 	private void initGUI() {
@@ -78,6 +84,11 @@ public class CD extends javax.swing.JFrame {
 			this.setTitle("Cd´s Prestados");
 			this.setResizable(false);
 			getContentPane().setBackground(new java.awt.Color(0,128,192));
+			this.addWindowListener(new WindowAdapter() {
+				public void windowClosing(WindowEvent evt) {
+					thisWindowClosing(evt);
+				}
+			});
 			{
 				jlbTitulo = new JLabel();
 				getContentPane().add(jlbTitulo);
@@ -171,6 +182,11 @@ public class CD extends javax.swing.JFrame {
 						jmItemBuscarReg = new JMenuItem();
 						jMnuArchivo.add(jmItemBuscarReg);
 						jmItemBuscarReg.setText("Buscar Registro");
+						jmItemBuscarReg.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent evt) {
+								jmItemBuscarRegActionPerformed(evt);
+							}
+						});
 					}
 					{
 						jSeparator1 = new JSeparator();
@@ -238,6 +254,40 @@ public class CD extends javax.swing.JFrame {
  		CDs.add(new CDBean(titulo,autor,genero,descripcion));
  		Collections.sort(CDs);
  		System.out.println(CDs.toString().toString());
+ 		// si añadimos cd y la  ventana buscar abierto les añade.
+ 		if (dlgBuscar!=null && dlgBuscar.isVisible())
+			dlgBuscar.actualizarLista();
      }
+     
+     private void jmItemBuscarRegActionPerformed(ActionEvent evt) {
+    	    dlgBuscar=new BuscarReg(this);
+    		dlgBuscar.setVisible(true);
+     }
+     
+     public void setRegDatos(int i) {
+ 		CDBean cd=CDs.get(i);
+ 		jtfTitulo.setText(cd.getTitulo());
+ 		jtfAutor.setText(cd.getAutor());
+ 		jtfGenero.setText(cd.getGenero());
+ 		jtaPrestamo.setText(cd.getPrestamo());
+ 	}
+     
+     private void thisWindowClosing(WindowEvent evt) {
+    	 System.out.println("this.windowClosing, event="+evt);
+    	 //TODO add your code for this.windowClosing
+     }
+     
+     // metodo para salir del aplicativo
+     // lo usamos en el menu salir y en la aspa de la pantalla.
+     private void salirForm() {
+ 		int respuesta = JOptionPane.showConfirmDialog(null,
+ 		"Esta acción cerrará la aplicación, ¿desea continuar?",
+ 		"Atención",
+ 		JOptionPane.YES_NO_OPTION);
 
+ 		if (respuesta != JOptionPane.YES_OPTION) {
+ 			return;
+ 		}
+ 		System.exit(0);
+ 	}
 }
