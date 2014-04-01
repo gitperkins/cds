@@ -32,7 +32,7 @@ public class BuscarReg extends javax.swing.JDialog {
 	private JList jlsListaCDs;
 	private JButton jbtCancelar;
 	
-	Cd ventanaPadre;
+	CD ventanaPadre;
 
 	/**
 	* Auto-generated main method to display this JDialog
@@ -50,7 +50,7 @@ public class BuscarReg extends javax.swing.JDialog {
 	public BuscarReg(JFrame frame) {
 		super(frame);
 		initGUI();
-		ventanaPadre=(Cd)frame;
+		ventanaPadre=(CD)frame;
 		jlsListaCDs.setListData(ventanaPadre.getCDs());	
 	}
 	

@@ -29,7 +29,7 @@ import javax.swing.SwingUtilities;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
-public class Cd extends javax.swing.JFrame {
+public class CD extends javax.swing.JFrame {
 
 	/**
 	 * 
@@ -58,14 +58,14 @@ public class Cd extends javax.swing.JFrame {
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				Cd inst = new Cd();
+				CD inst = new CD();
 				inst.setLocationRelativeTo(null);
 				inst.setVisible(true);
 			}
 		});
 	}
 	
-	public Cd() {
+	public CD() {
 		super();
 		initGUI();
 		CDs=new Vector<CDBean>();
