@@ -74,7 +74,7 @@ public class CD extends javax.swing.JFrame {
 		initGUI();
 		CDs=new Vector<CDBean>();
 		// Evitar cierre por defecto de la ventana.
-		this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		//this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 	}
 	
 	private void initGUI() {
@@ -83,10 +83,13 @@ public class CD extends javax.swing.JFrame {
 			getContentPane().setLayout(null);
 			this.setTitle("Cd´s Prestados");
 			this.setResizable(false);
+			
+			
 			getContentPane().setBackground(new java.awt.Color(0,128,192));
+			this.setAlwaysOnTop(true);
 			this.addWindowListener(new WindowAdapter() {
 				public void windowClosing(WindowEvent evt) {
-					thisWindowClosing(evt);
+					salirForm();
 				}
 			});
 			{
@@ -198,7 +201,8 @@ public class CD extends javax.swing.JFrame {
 						jmItemSalir.setText("Salir");
 						jmItemSalir.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent evt) {
-								jmItemSalirActionPerformed(evt);
+								System.out.println("salir");
+								salirForm();
 							}
 						});
 					}
@@ -212,17 +216,7 @@ public class CD extends javax.swing.JFrame {
 		}
 	}
 	
-	private void jmItemSalirActionPerformed(ActionEvent evt) {
-		int respuesta = JOptionPane.showConfirmDialog(null,
-				"Esta acción cerrará la aplicación, ¿desea continuar?",
-				"Atención",
-				JOptionPane.YES_NO_OPTION);
-
-				if (respuesta != JOptionPane.YES_OPTION) {
-					return;
-				}
-				System.exit(0);
-	}
+	
 	
 
 	
@@ -272,22 +266,19 @@ public class CD extends javax.swing.JFrame {
  		jtaPrestamo.setText(cd.getPrestamo());
  	}
      
-     private void thisWindowClosing(WindowEvent evt) {
-    	 System.out.println("this.windowClosing, event="+evt);
-    	 //TODO add your code for this.windowClosing
-     }
      
      // metodo para salir del aplicativo
      // lo usamos en el menu salir y en la aspa de la pantalla.
-     private void salirForm() {
- 		int respuesta = JOptionPane.showConfirmDialog(null,
- 		"Esta acción cerrará la aplicación, ¿desea continuar?",
- 		"Atención",
- 		JOptionPane.YES_NO_OPTION);
+     public void salirForm() {
+    	 System.out.println("funcion");
+    	 int respuesta = JOptionPane.showConfirmDialog(null,
+    				"Esta acción cerrará la aplicación, ¿desea continuar?",
+    				"Atención",
+    				JOptionPane.YES_NO_OPTION);
 
- 		if (respuesta != JOptionPane.YES_OPTION) {
- 			return;
- 		}
- 		System.exit(0);
+    				if (respuesta != JOptionPane.YES_OPTION) {
+    					return;
+    				}
+    				System.exit(0);
  	}
 }

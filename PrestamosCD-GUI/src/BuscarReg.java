@@ -63,6 +63,7 @@ public class BuscarReg extends javax.swing.JDialog {
 				this.setResizable(false);
 				getContentPane().setLayout(null);
 				this.setTitle("Buscar Registro");
+				getContentPane().setBackground(new java.awt.Color(0,128,192));
 				{
 					jbtAceptar = new JButton();
 					getContentPane().add(jbtAceptar);
